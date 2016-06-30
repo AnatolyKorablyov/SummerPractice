@@ -4,7 +4,7 @@ var СENTER_Y = 150;
 var RADIUS = 100;
 var SPEED = 0.04;
 var SCORE = 0;
-var TOP = 20;
+var TOP = 10;
 
 var canvas = document.querySelector("canvas");
 var context = canvas.getContext("2d");
