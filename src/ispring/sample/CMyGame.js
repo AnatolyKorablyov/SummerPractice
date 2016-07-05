@@ -118,7 +118,14 @@ goog.scope(function()
         },
         RotateSystem: function()
         {
-            this.m_rotation += SPEED;
+            if (this.m_twist)
+            {
+                this.m_rotation += this.m_speed;
+            }
+            else
+            {
+                this.m_rotation -= this.m_speed;
+            }
             for (var i = 1; i < this.m_shapes.length; ++i)
             {
                 this.m_shapes[i].SetRotation(this.m_shapes[i].GetStartRotation() + this.m_rotation);
@@ -205,7 +212,7 @@ goog.scope(function()
                     randNumber = this.GetRandomArbitary(0, NUMBER_OF_COLORS - 1);
                 }
                 this.m_shapes[0].SetColor(COLORS[randNumber]);
-                twist = !twist;
+                this.m_twist = !this.m_twist;
             }
         },
         GoGame: function ()
