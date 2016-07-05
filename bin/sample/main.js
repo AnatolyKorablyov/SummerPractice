@@ -1,21 +1,47 @@
 goog.provide("Sample");
 
 //goog.require("ispring.sample.Foo");
+/*
 goog.require("ispring.sample.Bar2");
 goog.require("ispring.sample.Bar3");
 goog.require("ispring.sample.IBar");
+*/
+
+goog.require("ispring.sample.CMyGame");
 
 /**
  * @export
  */
 Sample.start = function()
 {
+	
+	var myGame = ispring.sample.CMyGame;
+	
+	var game = new myGame();
+
+	function GameFun()
+	{
+		game.GoGame();
+		canvas.onmouseup = function ()
+		{
+			game.OnMouseClick();
+		};
+		requestAnimationFrame(GameFun);
+	}
+
+	GameFun();
+
+	
+
+	
+
 	/**
 	 * @param {ispring.sample.IBar} bar
 	 * @param {string} param1
 	 * @param {string} param2
 	 */
-	/*function testBar(bar, param1, param2)
+	/*
+	function testBar(bar, param1, param2)
 	{
 		bar.printValues(param1, param2)
 	}
@@ -28,8 +54,9 @@ Sample.start = function()
 	const bar3 = new Bar3();
 
 	testBar(bar, "bar1", "bar2");
-	testBar(bar3, "bar3", "bar4");*/
-
+	testBar(bar3, "bar3", "bar4");
+	*/
+/*
 	var COLORS = ["#F00", "#0F0", "#00F", "#FF0", "#0FF", "#FFF"];
 	var CENTER_X = 300;
 	var СENTER_Y = 150;
@@ -167,5 +194,6 @@ Sample.start = function()
 	}
 
 	DrawSector();
+	*/
 };
 
