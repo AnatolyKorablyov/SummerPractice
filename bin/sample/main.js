@@ -19,6 +19,8 @@ Sample.start = function()
 	
 	var game = new myGame();
 
+	var canvas = document.querySelector("canvas");
+
 	function GameFun()
 	{
 		game.GoGame();

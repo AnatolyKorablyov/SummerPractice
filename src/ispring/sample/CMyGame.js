@@ -1,14 +1,23 @@
 goog.provide("ispring.sample.CMyGame");
 
 goog.require("ispring.sample.CShape");
+
 goog.scope(function()
 {
+    /**
+     *
+     * @param x
+     * @param y
+     * @constructor
+     */
     function CCoord(x, y)
     {
         this.X = x;
         this.Y = y;
     }
 
+//    goog.math
+    
     const CShape = ispring.sample.CShape;
     const FONT_COLOR = "#00F";
     const COLORS = ["#F00", "#0F0", "#00F", "#FF0"];
@@ -20,7 +29,7 @@ goog.scope(function()
     const TOP = 20;
     const TWO_HALVES = 2;
     const NUMBER_OF_COLORS = 4;
-    const FONT = "italic 30pt Arial"
+    const FONT = "italic 30pt Arial";
     const POS_SCORE_LABEL = new CCoord(10, 50);
     const POS_SPEED_LABEL = new CCoord(20, 80);
     const POS_RECORD_LABEL = new CCoord(350, 50);
@@ -54,7 +63,7 @@ goog.scope(function()
         },
         /**
          *
-         * @param (CShape) l_shape
+         * @param {CShape} l_shape
          */
         AddShapeToArr: function (l_shape) {
             var localShape = new CShape();
@@ -224,3 +233,11 @@ goog.scope(function()
         }
     });
 });
+
+// сохранить треугольник в отдельну переменную и выпилить из масива shapes
+// использовать goog.math.Coordinate
+// упростить условия
+// методы с маленькой буквы
+// доработать оформление кода
+// передать canvas параметром в конструктор
+// вынести надписи с canvas-a

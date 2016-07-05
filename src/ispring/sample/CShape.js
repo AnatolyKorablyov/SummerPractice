@@ -43,7 +43,7 @@ goog.scope(function() {
         },
         /**
          * 
-         * @param (string) color
+         * @param {string} color
          */
         SetColor: function(color)
         {
@@ -51,7 +51,7 @@ goog.scope(function() {
         },
         /**
          *
-         * @param (number) rotation
+         * @param {number} rotation
          */
         SetRotation: function(rotation)
         {
@@ -59,7 +59,7 @@ goog.scope(function() {
         },
         /**
          *
-         * @param (number) rotation
+         * @param {number} rotation
          */
         SetStartRotation: function(rotation)
         {
@@ -67,8 +67,8 @@ goog.scope(function() {
         },
         /**
          *
-         * @param (number) posX
-         * @param (number) posY
+         * @param {number} posX
+         * @param {number} posY
          */
         SetPosition: function(posX, posY)
         {

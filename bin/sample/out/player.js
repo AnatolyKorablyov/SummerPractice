@@ -2568,6 +2568,7 @@ goog.addDependency('../../../src/ispring/sample/CShape.js', ['ispring.sample.CSh
 goog.addDependency('../../../src/ispring/sample/Foo.js', ['ispring.sample.Foo'], ['ispring.sample.IFoo', 'ispring.sample.SimpleFoo'], false);
 goog.addDependency('../../../src/ispring/sample/IBar.js', ['ispring.sample.IBar'], [], false);
 goog.addDependency('../../../src/ispring/sample/IFoo.js', ['ispring.sample.IFoo'], [], false);
+goog.addDependency('../../../src/ispring/sample/Path2D.js', ['ispring.sample.Path2D'], [], false);
 goog.addDependency('../../../src/ispring/sample/SimpleFoo.js', ['ispring.sample.SimpleFoo'], [], false);
 goog.addDependency('../main.js', ['Sample', '__tmp.Module0'], ['ispring.sample.CMyGame'], false);
 
