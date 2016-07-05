@@ -26,7 +26,7 @@ goog.scope(function()
     const RADIUS = 100;
     const SPEED = 0.04;
     const SCORE = 0;
-    const TOP = 20;
+    const TOP = 0;
     const TWO_HALVES = 2;
     const NUMBER_OF_COLORS = 4;
     const FONT = "italic 30pt Arial";
@@ -37,15 +37,15 @@ goog.scope(function()
 
 
 
-    var canvas = document.querySelector("canvas");
-    var context = canvas.getContext("2d");
+    //var canvas = document.querySelector("canvas");
+    //var context = canvas.getContext("2d");
 
 
     /**
      * @constructor
      */
     ispring.sample.CMyGame = goog.defineClass(null, {
-        constructor: function() {
+        constructor: function(canvas) {
             this.m_shapes = [];
             this.InitObjects();
 
@@ -55,6 +55,20 @@ goog.scope(function()
             this.m_rotation = 0;
             this.m_twist = true;
             this.m_changeColor = 0;
+            this.m_canvasSize = {width: canvas.width, height: canvas.height}; // использовать goog.math.Size
+            this.m_context = canvas.getContext("2d");
+
+            const thisPtr = this;
+
+            this.GoGame();
+            canvas.onmouseup = function()
+            {
+                thisPtr.OnMouseClick();
+            };
+
+            setInterval(function(){
+                thisPtr.GoGame();
+            }, 1000 / 30);
         },
 
         GetRandomArbitary: function(min, max)
@@ -83,7 +97,6 @@ goog.scope(function()
             shape.lineTo(0, RADIUS);
             shape.lineTo(RADIUS/2, 0);
             triangle.SetPath(shape);
-            shape.delete;
             this.m_changeColor = this.GetRandomArbitary(0, NUMBER_OF_COLORS - 1);
             triangle.SetColor(COLORS[this.m_changeColor]);
             triangle.SetPosition(CENTER_X - RADIUS / 2, CENTER_Y + RADIUS);
@@ -104,25 +117,24 @@ goog.scope(function()
                 this.m_shapes[num-1].SetRotation(2/NUMBER_OF_COLORS*Math.PI*i);
                 this.m_shapes[num-1].SetStartRotation(2/NUMBER_OF_COLORS*Math.PI*i);
             }
-            shape.delete;
         },
         DrawObjects: function()
         {
-            context.clearRect(0, 0, canvas.width, canvas.height);
+            this.m_context.clearRect(0, 0, this.m_canvasSize.width, this.m_canvasSize.height);
             for (var i = 0; i < this.m_shapes.length; ++i)
             {
-                context.save();
-                context.translate(this.m_shapes[i].GetPosition().X, this.m_shapes[i].GetPosition().Y);
-                context.rotate(this.m_shapes[i].GetRotation());
-                context.fillStyle = this.m_shapes[i].GetColor();
-                context.fill(this.m_shapes[i].GetPath());
-                context.restore();
+                this.m_context.save();
+                this.m_context.translate(this.m_shapes[i].GetPosition().X, this.m_shapes[i].GetPosition().Y);
+                this.m_context.rotate(this.m_shapes[i].GetRotation());
+                this.m_context.fillStyle = this.m_shapes[i].GetColor();
+                this.m_context.fill(this.m_shapes[i].GetPath());
+                this.m_context.restore();
             }
-            context.fillStyle = FONT_COLOR;
-            context.font = FONT;
-            context.fillText("Score " + this.m_score, POS_SCORE_LABEL.X, POS_SCORE_LABEL.Y);
-            context.fillText("Speed " + Math.ceil(this.m_speed*100)/100, POS_SPEED_LABEL.X, POS_SPEED_LABEL.Y);
-            context.fillText("Record " + this.m_top, POS_RECORD_LABEL.X, POS_RECORD_LABEL.Y);
+            this.m_context.fillStyle = FONT_COLOR;
+            this.m_context.font = FONT;
+            this.m_context.fillText("Score " + this.m_score, POS_SCORE_LABEL.X, POS_SCORE_LABEL.Y);
+            this.m_context.fillText("Speed " + Math.ceil(this.m_speed*100)/100, POS_SPEED_LABEL.X, POS_SPEED_LABEL.Y);
+            this.m_context.fillText("Record " + this.m_top, POS_RECORD_LABEL.X, POS_RECORD_LABEL.Y);
 
         },
         RotateSystem: function()
@@ -205,6 +217,9 @@ goog.scope(function()
                 if (this.m_score > this.m_top)
                 {
                     this.m_top = this.m_score;
+
+                    window.localStorage.setItem("topResult", this.m_top);
+                    window.localStorage.getItem("topResult");
                 }
                 this.m_score = SCORE;
                 this.m_speed = SPEED;
@@ -241,3 +256,6 @@ goog.scope(function()
 // доработать оформление кода
 // передать canvas параметром в конструктор
 // вынести надписи с canvas-a
+// переписать на MVC
+// сохранять и загружать top result в localstorage
+
