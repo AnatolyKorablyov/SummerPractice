@@ -154,19 +154,30 @@ goog.scope(function()
         },
         CheckColors: function()
         {
+            /**
+             *
+             * @param {number} min
+             * @param {number} max
+             */
+            function checkRange(min, max)
+            {
+                return (this.m_shapes[i].GetStartRotation() < min && max < TWO_HALVES / NUMBER_OF_COLORS * Math.PI * i &&
+                    this.m_shapes[i].GetColor() == this.m_shapes[0].GetColor());
+            }
+
             var turn = this.m_rotation / (TWO_HALVES * Math.PI);
             turn = turn % 1;
             turn = turn * 2 * Math.PI;
             if (turn < 0)
             {
                 turn = Math.abs(turn);
-                for (var i = 1; i < this.m_shapes.length; ++i) {
-                    if (this.m_shapes[i].GetStartRotation() < turn && turn < TWO_HALVES / NUMBER_OF_COLORS * Math.PI * i &&
-                        this.m_shapes[i].GetColor() == this.m_shapes[0].GetColor())
+                console.log(turn);
+                for (var i = 1; i < this.m_shapes.length; ++i)
+                {
+                    if (checkRange(turn, turn))
                     {
                         return true;
                     }
-
                 }
             }
             else
@@ -218,8 +229,8 @@ goog.scope(function()
                 {
                     this.m_top = this.m_score;
 
-                    window.localStorage.setItem("topResult", this.m_top);
-                    window.localStorage.getItem("topResult");
+                   // window.localStorage.setItem("topResult", this.m_top);
+                   // window.localStorage.getItem("topResult");
                 }
                 this.m_score = SCORE;
                 this.m_speed = SPEED;
